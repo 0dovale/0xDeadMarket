@@ -100,6 +100,62 @@
   border-radius: 10px;
   margin-bottom: 15px;
 }
+
+#menuButton {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #00ffff;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 0 10px #00ffff88;
+  transition: background 0.2s ease;
+}
+
+#menuButton:hover {
+  background: #00ff88;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  color: white;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  z-index: 999;
+  box-shadow: -5px 0 20px rgba(0, 255, 255, 0.4);
+}
+
+#sidebar.hidden {
+  transform: translateX(100%);
+}
+
+#sidebar.visible {
+  transform: translateX(0);
+}
+
+.menu-section {
+  margin-top: 40px;
+}
+
+.menu-section h3 {
+  margin-bottom: 10px;
+}
+
+.menu-section .btn {
+  display: inline-block;
+  margin-top: 5px;
+}
+
+    
   </style>
 </head>
 <body>
@@ -127,7 +183,7 @@
     <div class="card" onclick="playClick()">
       <h2>Scarlett Menu - PC</h2>
       <h3>Versão Pro</h3>
-      <img src="Scarllet Menu.jpg">
+      <img src="Scarllet-Menu.jpg">
       <p>O Mod Menu de SAMP perfeito pra trolar os otários!</p>
       <div class="price">R$15,00</div>
       <a href="https://pay.risepay.com.br/Pay/a213dd490ccf41969b90dd106a6e71c9" class="btn" target="_blank">Comprar</a>
@@ -136,7 +192,7 @@
     <div class="card" onclick="playClick()">
       <h2>Scarlett Menu - PC</h2>
       <h3>Versão Grátis</h3>
-      <img src="Scarllet Menu.jpg">
+      <img src="Scarllet-Menu.jpg">
       <p>O Mod Menu de SAMP perfeito pra trolar os otários!</p>
       <p>(Possui menos funcionalidades)</p>
       <div class="price">Grátis</div>
@@ -146,7 +202,7 @@
     <div class="card" onclick="playClick()">
       <h2>Scarlett Menu - ADR</h2>
       <h3>Versão Grátis</h3>
-      <img src="Scarllet Menu Android.jpg">
+      <img src="Scarllet-Menu-Android.jpg">
       <p>O Mod Menu de SAMP perfeito pra trolar os otários!</p>
       <p>(Funcionalidades básicas)</p>
       <div class="price">Grátis</div>
@@ -224,5 +280,26 @@
       sound.play();
     }
   </script>
+
+<!-- Botão Menu -->
+<div id="menuButton" onclick="toggleSidebar()">Menu</div>
+
+<!-- Barra Lateral -->
+<div id="sidebar" class="hidden">
+  <h2>Catálogo</h2>
+  <div class="menu-section">
+    <h3>Contato</h3>
+    <a href="https://www.instagram.com/dovale.exe/" class="btn" target="_blank">Instagram</a>
+  </div>
+</div>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("visible");
+    sidebar.classList.toggle("hidden");
+  }
+</script>
+
 </body>
 </html>
