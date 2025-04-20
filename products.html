@@ -14,6 +14,18 @@
       <a href="index.html">Início</a>
       <a href="products.html">Produtos</a>
     </nav>
+
+    <div class="social-buttons">
+      <button onclick="window.open('https://www.tiktok.com/@dovale.store?_t=ZM-8vhNNpuOFk5&_r=1', '_blank')">
+        <img src="TikTok.png" alt="TikTok" />
+      </button>
+      <button onclick="window.open('https://www.instagram.com/dovale.exe', '_blank')">
+        <img src="Instagram.png" alt="Instagram" />
+      </button>
+      <button onclick="copyEmail()">
+        <img src="Email.png" alt="dovale.store.contact@gmail.com" />
+      </button>
+    </div>
   </header>
 
   <main class="main-content fade-in">
@@ -226,6 +238,15 @@
       clone.play();
     }
   });
+</script>
+
+<script>
+  function copyMessage() {
+    const text = "Mensagem personalizada copiada com sucesso!";
+    navigator.clipboard.writeText(text).then(() => {
+      alert("Mensagem copiada!");
+    });
+  }
 </script>
 </body>
 </html>
