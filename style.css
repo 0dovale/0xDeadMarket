@@ -527,3 +527,98 @@ nav a:hover {
   height: 20px;
   object-fit: contain;
 }
+
+/* Header centralizado */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  background-color: #1a1a2e;
+  padding: 20px 0;
+  box-shadow: 0 0 15px #a020f0;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: rgb(174, 0, 255);
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Navegação centralizada */
+.nav-central {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 5px;
+}
+
+.nav-central a {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav-central a:hover {
+  color: #a020f0;
+}
+
+/* Botões sociais centralizados */
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.social-buttons img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Titulo da header */
+.logo {
+  font-size: 2rem;
+  font-family: 'Orbitron', sans-serif;
+  color: rgb(138, 0, 218);
+  padding: 10px 20px;
+  position: relative;
+  z-index: 1;
+  border-radius: 12px;
+  background: rgba(130, 0, 230, 0.15); /* fundo roxo suave */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(160, 32, 240, 0.8); /* glow roxo */
+}
+  
+    
+    .logo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, #a020f0, #ff00ff);
+      opacity: 0.2;
+      z-index: -1;
+      border-radius: 12px;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1a1a2e;
+      color: #ccc;
+      font-size: 14px;
+    }
