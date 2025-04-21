@@ -9,6 +9,10 @@
 </head>
 <body>
   <header>
+    <div class="logo-circle">
+      <img src="0xDead-Market.png" alt="Logo 0xDead Market">
+    </div>
+    
     <div class="logo">🛒 0xDead Market</div>
     <nav>
       <a href="index.html">Início</a>
@@ -343,6 +347,38 @@
     navigator.clipboard.writeText(text).then(() => {
       alert("Mensagem copiada!");
     });
+  }
+</script>
+
+<style>
+  .snowflake {
+    position: fixed;
+    top: -10px;
+    background: #a855f7; /* Cor roxa */
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall linear infinite;
+    z-index: 9999;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(100vh);
+    }
+  }
+</style>
+
+<script>
+  const snowCount = 50;
+  for (let i = 0; i < snowCount; i++) {
+    const snow = document.createElement("div");
+    snow.classList.add("snowflake");
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.animationDuration = 3 + Math.random() * 5 + "s";
+    snow.style.opacity = Math.random();
+    document.body.appendChild(snow);
   }
 </script>
 </body>
