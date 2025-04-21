@@ -9,6 +9,10 @@
 </head>
 <body>
   <header>
+    <div class="logo-circle">
+      <img src="0xDead-Market.png" alt="Logo 0xDead Market">
+    </div>
+
     <div class="logo">🛒 0xDead Market</div>
     
     <nav class="nav-central">
@@ -17,10 +21,10 @@
     </nav>
   
     <div class="social-buttons">
-      <button onclick="window.open('https://www.tiktok.com/@0xdeadmarket?_t=ZM-8vhVRpIiLjh&_r=1', '_blank')">
+      <button onclick="window.open('https://www.tiktok.com/@dovale.store?_t=ZM-8vhNNpuOFk5&_r=1', '_blank')">
         <img src="TikTok.png" alt="TikTok" />
       </button>
-      <button onclick="window.open('https://www.instagram.com/0xdeadmarket', '_blank')">
+      <button onclick="window.open('https://www.instagram.com/dovale.exe', '_blank')">
         <img src="Instagram.png" alt="Instagram" />
       </button>
     </div>
@@ -212,6 +216,38 @@
     navigator.clipboard.writeText(text).then(() => {
       alert("Mensagem copiada!");
     });
+  }
+</script>
+
+<style>
+  .snowflake {
+    position: fixed;
+    top: -10px;
+    background: #a855f7; /* Cor roxa */
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall linear infinite;
+    z-index: 9999;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(100vh);
+    }
+  }
+</style>
+
+<script>
+  const snowCount = 50;
+  for (let i = 0; i < snowCount; i++) {
+    const snow = document.createElement("div");
+    snow.classList.add("snowflake");
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.animationDuration = 3 + Math.random() * 5 + "s";
+    snow.style.opacity = Math.random();
+    document.body.appendChild(snow);
   }
 </script>
 </body>
