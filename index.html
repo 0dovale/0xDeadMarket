@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>0xDead Market</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+      color: #fff;
+      overflow-x: hidden;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      padding: 2rem;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 10);
+      position: relative;
+    }
+    .logo {
+      font-size: 2rem;
+      color: #a855f7;
+      text-shadow: 0 0 10px #a855f7;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 30px; /* Sobe/Desce */
+}
+    nav a {
+      margin: 0 1rem;
+      color: #fff;
+      text-decoration: none;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: #a855f7;
+      transition: 0.3s ease;
+    }
+      nav a:hover::after {
+      width: 100%;
+    }
+    .hero {
+    position: relative;
+    padding: 2.5rem;
+    margin: 2rem auto;
+    max-width: 900px;
+    border: 2px solid #a855f7;
+    box-shadow: 0 0 15px #a855f7, 
+                inset 0 0 15px #a855f7;
+    border-radius: 10px;
+    background: rgba(10, 10, 10, 0.6);
+    text-align: center; /* Centraliza todo o conteúdo */
+  }
+
+  .hero-content {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente */
+  }
+
+  .hero h1 {
+    max-width: 80%; /* Controla largura do título */
+  }
+
+  .hero p {
+    max-width: 700px; /* Largura ideal para leitura */
+    margin-left: auto;
+    margin-right: auto;
+  }
+    .neon-btn {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      background: transparent;
+      border: 2px solid #a855f7;
+      border-radius: 50px;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 10px #a855f7, inset 0 0 10px #a855f7;
+      transition: 0.3s;
+    }
+    .neon-btn:hover {
+      background: #a855f7;
+      box-shadow: 0 0 20px #a855f7, inset 0 0 20px #a855f7;
+    }
+    .glass-section {
+      margin-top: 5rem;
+      padding: 3rem;
+      background: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+      max-width: 90vw;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    .glass-section h2 {
+      font-size: 2rem;
+      color: #a855f7;
+    }
+
+    .floating-ui {
+      position: absolute;
+      top: 125px;
+      left: 65px;
+      transform: translateX(-50%);
+      background: rgba(70, 0, 110, 0.325);
+      padding: 1rem;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #a855f7;
+      backdrop-filter: blur(10px);
+      animation: floaty 4s ease-in-out infinite;
+      z-index: 9999;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    /* Estilos para os cards */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+      padding: 0 40px;
+      align-items: stretch;
+    }
+    
+    .product-card {
+      background: rgba(168, 85, 247, 0.05);
+      padding: 20px;
+      border-radius: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.8);
+    }
+    
+    .product-card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .product-card h3 {
+      margin: 10px 0 4px;
+      font-size: 18px;
+      color: #fff;
+    }
+    
+    .stock {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    /* Redes sociais */
+    .social-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .social-buttons button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .social-buttons button:hover {
+      transform: scale(1.1);
+    }
+
+    .social-buttons img {
+      width: 30px;
+      height: 30px;
+    }
+
+    /* Logo na posição certa */
+    .logo-circle {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      overflow: hidden;
+      background: rgba(163, 66, 255, 0.2);
+      box-shadow: 0 0 20px rgba(163, 66, 255, 0.6);
+      backdrop-filter: blur(5px);
+    }
+    
+    .circle-effect {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      animation: pulseRotate 4s linear infinite;
+      filter: drop-shadow(0 0 10px #a855f7);
+      opacity: 1.0;
+    }
+    
+    .logo-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(168, 85, 247, 0.3);
+    }
+    
+    .logo-circle:hover .logo-img {
+      transform: scale(1.05);
+      border-color: rgba(168, 85, 247, 0.6);
+    }
+    
+    .logo-circle::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(168,85,247,0.4) 0%, rgba(168,85,247,0) 70%);
+      border-radius: 50%;
+      z-index: 1;
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseRotate {
+      0% { transform: rotate(0deg) scale(1); opacity: 0.9; }
+      50% { transform: rotate(180deg) scale(1.05); opacity: 0.7; }
+      100% { transform: rotate(360deg) scale(1); opacity: 0.9; }
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.1); opacity: 0.4; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes floaty {
+      0% { transform: translateY(0) translateX(-50%); }
+      50% { transform: translateY(-10px) translateX(-50%); }
+      100% { transform: translateY(0) translateX(-50%); }
+    }
+
+      /* Site mobile */
+  @media (max-width: 768px) {
+    header {
+      height: auto;
+      padding: 1rem;
+      flex-direction: column;
+    }
+    
+    .logo {
+      position: static;
+      transform: none;
+      margin: 10px 0;
+      font-size: 1.5rem;
+    }
+    
+    .logo-circle {
+      position: static;
+      margin: 0 auto;
+      width: 60px;
+      height: 60px;
+    }
+    
+    nav {
+      margin-top: 15px;
+    }
+    
+    .hero {
+      padding: 1.5rem;
+      margin: 1rem;
+      max-width: 100%;
+    }
+    
+    .hero h1 {
+      font-size: 2rem;
+      max-width: 100%;
+    }
+    
+    .hero p {
+      max-width: 100%;
+      font-size: 1rem;
+    }
+    
+    .floating-ui {
+      position: static;
+      transform: none;
+      margin: 20px auto;
+      width: 90%;
+      animation: none;
+    }
+    
+    .products-grid {
+      grid-template-columns: 1fr;
+      padding: 0 15px;
+      gap: 20px;
+    }
+    
+    .glass-section {
+    position: relative;
+    padding: 2.5rem;
+    margin: 2rem 20px; /* margem nas laterais (20px de cada lado) */
+    max-width: 900px;
+    border: 2px solid #a855f7;
+    box-shadow: 0 0 15px #a855f7, 
+    inset 0 0 15px #a855f7;
+    border-radius: 10px;
+    background: rgba(10, 10, 10, 0.6);
+    text-align: center; /* Centraliza todo o conteúdo */
+    }
+
+    .neon-btn {
+      padding: 0.8rem 1.5rem;
+    }
+  }
+
+  /* Melhorias para tablets */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-circle">
+      <img src="Circulo-Relampago-Roxo2.png" class="circle-effect" alt="Efeito" />
+      <img src="0xDead-Market.jpg" class="logo-img" alt="Logo 0xDead Market">
+    </div>
+    <div class="logo">0xDead Market</div>
+    <nav>
+      <a href="index2.html">Início</a>
+    </nav>
+  </header>
+
+  <div class="floating-ui">
+    <p><strong>Suporte:</strong></p>
+    <div class="social-buttons">
+      <button onclick="window.open('https://www.tiktok.com/@0xdeadmarket?_t=ZM-8vhVRpIiLjh&_r=1', '_blank')">
+        <img src="TikTok.png" alt="TikTok" />
+      </button>
+      <button onclick="window.open('https://www.instagram.com/0xdeadmarket', '_blank')">
+        <img src="Instagram.png" alt="Instagram" />
+      </button>
+    </div>
+  </div> 
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Bem-Vindo ao <span style="color: #a855f7; text-shadow: 0 0 8px #a855f7;">0xDead Market</h1>
+      <p>0xDead Market nasceu com o propósito de oferecer os melhores cheats para sua experiência em jogos. Trabalhamos com segurança, rapidez e qualidade.</p>
+      <p>Nosso foco é criar uma plataforma confiável, leal, com uma interface moderna e simples de usar.</p>
+      <p>Fique à vontade para navegar pela loja, conhecer os produtos e fazer parte dessa comunidade!</p>
+      <p>Esse é o <span style="color: #a855f7; text-shadow: 0 0 8px #a855f7;">0xDead Market</span>. Bem-Vindo(a) e boa compra!</p>
+    </div>
+    <div class="hero-btn-container">
+      <button class="neon-btn" style="color: #a855f7; font-weight: bold; text-shadow: 0 0 10px #a855f7;" onclick="window.location.href='index2.html';">Ver Produtos</button>
+    </div>
+  </section>
+  
+  <div class="glass-section" id="features">
+    <h2>🆕 Atualizações</h2>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <img src="FFH4X.jpg" alt="Painel CLT">
+        <h3>Mod Menu FFH4X</h3>
+        <p class="stock">Adicionado em 20/04/2025</p>
+      </div>
+      
+      <div class="product-card">
+        <img src="Scooby-Doo.jpg" alt="Painel CLT">
+        <h3>Painel Scooby-Doo - ADR</h3>
+        <p class="stock">Adicionado em 16/04/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="CLT.jpg" alt="Painel CLT">
+        <h3>Painel CLT - ADR</h3>
+        <p class="stock">Adicionado em 09/04/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="CLT.jpg" alt="Painel CLT">
+        <h3>Painel CLT - iOS</h3>
+        <p class="stock">Adicionado em 01/04/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="Scooby-Doo.jpg" alt="Painel Scooby Doo">
+        <h3>Painel Scooby Doo - iOS</h3>
+        <p class="stock">Adicionado em 31/03/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="XIT-DNS.jpeg" alt="XIT DNS">
+        <h3>XIT DNS - iOS</h3>
+        <p class="stock">Adicionado em 30/03/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="HS-Cabeça-ADR.jpg" alt="HS Cabeça">
+        <h3>HS Cabeça - ADR</h3>
+        <p class="stock">Adicionado em 29/03/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="HS-Pescoço-ADR.jpg" alt="HS Pescoço">
+        <h3>HS Pescoço - ADR</h3>
+        <p class="stock">Adicionado em 28/03/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="HS-Pescoço.png" alt="HS Pescoço">
+        <h3>HS Pescoço - iOS</h3>
+        <p class="stock">Adicionado em 27/03/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="HS-Cabeça.png" alt="HS Cabeça">
+        <h3>HS Cabeça - iOS</h3>
+        <p class="stock">Adicionado em 26/03/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="HS-Peito-ADR.png" alt="HS Peito">
+        <h3>HS Peito - ADR</h3>
+        <p class="stock">Adicionado em 25/03/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="HS-Peito.PNG" alt="HS Peito">
+        <h3>HS Peito - iOS</h3>
+        <p class="stock">Adicionado em 19/03/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="JordanX.png" alt="Painel JordanX">
+        <h3>Painel JordanX - iOS</h3>
+        <p class="stock">Adicionado em 27/02/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="JordanX.png" alt="Painel JordanX">
+        <h3>Painel JordanX - ADR</h3>
+        <p class="stock">Adicionado em 21/02/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="SadX.png" alt="Painel SadX">
+        <h3>Painel SadX - iOS</h3>
+        <p class="stock">Adicionado em 11/02/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="SadX.png" alt="Painel SadX">
+        <h3>Painel SadX - ADR</h3>
+        <p class="stock">Adicionado em 05/02/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="Scarllet-Menu-Android.jpg" alt="Scarllet Menu">
+        <h3>Scarllet Menu - ADR</h3>
+        <p class="stock">VERSÃO GRÁTIS</p>
+        <p class="stock">Adicionado em 01/01/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="Scarllet-Menu.jpg" alt="Scarllet Menu">
+        <h3>Scarllet Menu - PC</h3>
+        <p class="stock">VERSÃO PAGA</p>
+        <p class="stock">Adicionado em 01/01/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="Scarllet-Menu.jpg" alt="Scarllet Menu">
+        <h3>Scarllet Menu - PC</h3>
+        <p class="stock">VERSÃO GRÁTIS</p>
+        <p class="stock">Adicionado em 01/01/2025</p>
+      </div>
+
+      <div class="product-card">
+        <img src="UrielXiter.png" alt="Uriel Xiter">
+        <h3>Uriel Xiter - ADR</h3>
+        <p class="stock">Adicionado em 29/12/2024</p>
+      </div>
+
+      <div class="product-card">
+        <img src="UrielXiter.png" alt="Uriel Xiter">
+        <h3>Uriel Xiter - iOS</h3>
+        <p class="stock">Adicionado em 27/12/2024</p>
+      </div>
+
+      <div class="product-card">
+        <img src="UltraFuck.jpg" alt="UltraFuck">
+        <h3>UltraFuck - PC</h3>
+        <p class="stock">Adicionado em 10/10/2024</p>
+      </div>
+
+      <div class="product-card">
+        <img src="Stealth.png" alt="Stealth">
+        <h3>Stealth - PC</h3>
+        <p class="stock">Adicionado em 06/09/2024</p>
+      </div>
+    </div>
+
+  <div class="glass-section">
+    <h2>Direitos</h2>
+    <p>&copy; 2024 0xDead Market. Todos os direitos reservados.</p>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const createSnowflake = () => {
+        const snowflake = document.createElement("div");
+        snowflake.classList.add("snowflake");
+        snowflake.style.left = Math.random() * 100 + "vw";
+        snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+        snowflake.style.opacity = Math.random();
+        document.body.appendChild(snowflake);
+  
+        setTimeout(() => {
+          snowflake.remove();
+        }, 5000);
+      };
+  
+      setInterval(createSnowflake, 150);
+    });
+  </script>
+
+  <style>
+    .snowflake {
+      position: fixed;
+      top: 0;
+      width: 10px;
+      height: 10px;
+      background: #a855f7;
+      box-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7;
+      border-radius: 50%;
+      animation: fall linear infinite;
+      z-index: 9999;
+    }
+  
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</body>
+</html>
