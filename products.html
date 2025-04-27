@@ -2,101 +2,459 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Produtos - 0xDead Market</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Estilos adicionais para os cards */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      width: 100%;
+    * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    .product-card {
-      background: #1a1a2e;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
+      color: #e0e0e0;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Glitch Background Effect */
+    .glitch-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://wallpapers.com/images/hd/purple-space-background-5145-x-2226-oe1kqq43c0yoj2xr.jpg') repeat;
+      opacity: 1.0;
+      z-index: -1;
+      animation: glitch 5s infinite;
+    }
+
+    @keyframes glitch {
+      0%, 100% { transform: translate(0, 0); opacity: 0.1; }
+      50% { transform: translate(2px, -2px); opacity: 0.15; }
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      height: 100%;
+      align-items: center;
+      padding: 1.0rem 3rem;
+      background: rgba(10, 10, 20, 0.9);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.7);
+      z-index: 1000;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.5), transparent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.8);
+    }
+
+    .logo-circle img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: drop-shadow(0 0 10px #a855f7);
+    }
+
+    .logo-text {
+      font-size: 2rem;
+      color: #a855f7;
+      text-shadow: 0 0 15px #a855f7;
+      animation: flicker 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    nav {
+      margin-top: 1rem;
+    }
+
+    nav a {
+      margin: 0 1.5rem;
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 1.1rem;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: -8px;
+      left: 0;
+      background: linear-gradient(90deg, #a855f7, #ff00ff);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: #a855f7;
+      text-shadow: 0 0 10px #a855f7;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 8rem 2rem 5rem;
+      text-align: center;
+      background: rgba(10, 10, 20, 0.5);
+      backdrop-filter: blur(10px);
+      min-height: 100vh;
+    }
+
+    .main-content h1 {
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 0 0 20px #a855f7, 0 0 40px #ff00ff;
+      animation: neon-pulse 2s infinite;
+      margin-bottom: 1rem;
+    }
+
+    .main-content p {
+      font-size: 1.2rem;
+      color: #ccc;
+      text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+      margin-bottom: 2rem;
+    }
+
+    @keyframes neon-pulse {
+      0%, 100% { text-shadow: 0 0 20px #a855f7, 0 0 40px #ff00ff; }
+      50% { text-shadow: 0 0 30px #a855f7, 0 0 60px #ff00ff; }
+    }
+
+    /* Search Bar */
+    .search-bar {
+      max-width: 500px;
+      margin: 2rem auto;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 50px;
+      background: rgba(20, 20, 40, 0.8);
+      color: #e0e0e0;
+      box-shadow: 0 0 15px #a855f7;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .search-bar input::placeholder {
+      color: #a855f7;
+      opacity: 0.7;
+    }
+
+    .search-bar input:focus {
+      box-shadow: 0 0 25px #a855f7, inset 0 0 10px #a855f7;
+      background: rgba(30, 30, 50, 0.9);
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 0 2rem;
+    }
+
+    .product-card {
+      background: rgba(20, 20, 40, 0.8);
+      border: 2px solid #a855f7;
+      border-radius: 15px;
+      padding: 1.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: card-appear 0.5s ease-out;
     }
 
     .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(168, 85, 247, 0.4);
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px #a855f7;
     }
 
     .product-card img {
       width: 100%;
-      height: 150px;
+      height: 200px;
       object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 10px;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      filter: brightness(0.9);
+      transition: filter 0.3s;
+    }
+
+    .product-card:hover img {
+      filter: brightness(1.1);
     }
 
     .product-card .tag {
       background: #a855f7;
-      color: white;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 12px;
+      color: #fff;
+      padding: 0.3rem 0.8rem;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
       align-self: flex-start;
-      margin-bottom: 8px;
+      margin-bottom: 1rem;
     }
 
     .product-card h2 {
-      margin: 8px 0;
-      font-size: 16px;
+      font-size: 1.5rem;
       color: #fff;
+      margin-bottom: 0.5rem;
       flex-grow: 1;
     }
 
     .product-card .price {
+      font-size: 1.2rem;
+      color: #0f0;
       font-weight: bold;
-      color: #a855f7;
-      margin: 5px 0;
-      font-size: 18px;
+      margin-bottom: 0.5rem;
     }
 
     .product-card .stock {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 1rem;
+    }
+
+    .neon-btn {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      background: transparent;
+      border: 3px solid #a855f7;
+      border-radius: 50px;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 15px #a855f7, inset 0 0 15px #a855f7;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .neon-btn:hover {
+      background: #a855f7;
+      box-shadow: 0 0 30px #a855f7, inset 0 0 30px #a855f7;
+      transform: scale(1.05);
+    }
+
+    /* Floating UI */
+    .floating-ui {
+      position: fixed;
+      top: 150px;
+      left: 20px;
+      background: rgba(20, 20, 40, 0.8);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #a855f7;
+      backdrop-filter: blur(10px);
+      animation: floaty 3s ease-in-out infinite;
+      z-index: 999;
+      text-align: center;
+    }
+
+    .floating-ui p {
+      font-size: 1rem;
+      color: #a855f7;
+      margin-bottom: 1rem;
+    }
+
+    .social-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .social-buttons button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .social-buttons button:hover {
+      transform: scale(1.2);
+    }
+
+    .social-buttons img {
+      width: 32px;
+      height: 32px;
+      filter: drop-shadow(0 0 5px #a855f7);
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Pop-up */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(20, 20, 40, 0.95);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 40px #a855f7;
+      z-index: 10000;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      animation: popup-appear 0.3s ease-out;
+    }
+
+    .popup h2 {
+      font-size: 2rem;
+      color: #a855f7;
+      margin-bottom: 1rem;
+    }
+
+    .popup p {
+      font-size: 1.2rem;
       color: #ccc;
-      font-size: 12px;
-      margin: 5px 0;
+      margin-bottom: 2rem;
     }
 
-    .product-card .btn-neon {
-      width: 100%;
-      padding: 10px;
-      margin-top: auto;
+    .popup .neon-btn {
+      background: #a855f7;
     }
 
-    /* Garantir que todos os cards tenham a mesma altura */
-    .product-card > *:last-child {
-      margin-top: auto;
+    .popup .neon-btn:hover {
+      background: #ff00ff;
+    }
+
+    @keyframes popup-appear {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    /* Snowflake Effect */
+    .snowflake {
+      position: fixed;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      background: #a855f7;
+      box-shadow: 0 0 15px #a855f7;
+      border-radius: 50%;
+      animation: fall linear infinite;
+      z-index: 999;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(100vh); }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .main-content h1 {
+        font-size: 2rem;
+      }
+
+      .main-content p {
+        font-size: 1rem;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .floating-ui {
+        position: static;
+        margin: 1rem auto;
+        width: 90%;
+        animation: none;
+      }
+
+      header {
+        padding: 1rem;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+      }
+
+      nav {
+        margin-top: 0.5rem;
+      }
+
+      nav a {
+        margin: 0.5rem;
+      }
+
+      .search-bar {
+        max-width: 90%;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
 <body>
+  <div class="glitch-bg"></div>
+
   <header>
-    <div class="logo-circle">
-      <img src="Circulo-Relampago-Roxo.png" class="circle-effect" alt="Efeito" />
-      <img src="0xDead-Market.jpg" class="logo-img" alt="Logo 0xDead Market">
+    <div class="logo-container">
+      <div class="logo-circle">
+        <img src="0xDead-Market.jpg" alt="Logo 0xDead Market">
+      </div>
+      <div class="logo-text">🛒 0xDead Market</div>
     </div>
-  
-    <div class="logo" style="margin-top: -12.5px;">🛒 0xDead Market</div>
-  
-    <nav style="margin-left: auto; display: flex; align-items: center;">
-      <button class="neon-btn" style="color: #a855f7; font-weight: bold; text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7; background: transparent; border: 2px solid #a855f7; border-radius: 100px; padding: 10px 20px; cursor: pointer; transition: all 0.3s ease;" onclick="window.location.href='index.html';" onmouseover="this.style.backgroundColor='#a855f7'; this.style.color='#fff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#a855f7';">Início</button>
+    <nav>
+      <a href="index.html">Início</a>
     </nav>
-  </header>  
-  
+  </header>
+
   <div class="floating-ui">
     <p><strong>Suporte:</strong></p>
     <div class="social-buttons">
@@ -107,366 +465,302 @@
         <img src="Instagram.png" alt="Instagram" />
       </button>
     </div>
-  </div>  
+  </div>
 
-  <main class="main-content fade-in">
+  <main class="main-content" id="products">
     <h1>🛍️ Explorar Produtos</h1>
-    <p>Confira os melhores <span class="highlight">cheats exclusivos</span> abaixo.</p>
+    <p>Confira os melhores <span style="color: #a855f7; text-shadow: 0 0 8px #a855f7;">cheats exclusivos</span> abaixo.</p>
 
-    <!-- 🔍 Barra de Pesquisa -->
     <div class="search-bar">
       <input type="text" id="searchInput" placeholder="🔎 Pesquisar produtos..." />
     </div>
 
     <div class="products-grid" id="productsGrid">
-
       <div class="product-card">
-        <img src="FFH4X.jpg" alt="FFH4X">
         <span class="tag">Free Fire</span>
+        <img src="FFH4X.jpg" alt="FFH4X">
         <h2>FFH4X - ADR</h2>
         <p class="price">R$29,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/123a754a654c4d9198f4ef871f07054d">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/123a754a654c4d9198f4ef871f07054d" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="FFH4X.jpg" alt="FFH4X">
         <span class="tag">Free Fire</span>
+        <img src="FFH4X.jpg" alt="FFH4X">
         <h2>FFH4X - iOS</h2>
         <p class="price">R$29,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/c5721a799bf74d32921ce475e7c24d8f">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/c5721a799bf74d32921ce475e7c24d8f" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="XIT-DNS.jpeg" alt="XIT DNS">
         <span class="tag">Free Fire</span>
+        <img src="XIT-DNS.jpeg" alt="XIT DNS">
         <h2>XIT DNS - iOS</h2>
         <p class="price">R$24,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/f65bb7e5186c47568b52ba5e075934c3">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/f65bb7e5186c47568b52ba5e075934c3" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="HS-Peito.PNG" alt="HS Peito">
         <span class="tag">Free Fire</span>
+        <img src="HS-Peito.PNG" alt="HS Peito">
         <h2>HS Pescoço - iOS</h2>
         <p class="price">R$29,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/ae962e8c06694ec88a9567b463c73955">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/ae962e8c06694ec88a9567b463c73955" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="HS-Pescoço-ADR.jpg" alt="HS Pescoço">
         <span class="tag">Free Fire</span>
+        <img src="HS-Pescoço-ADR.jpg" alt="HS Pescoço">
         <h2>HS Pescoço - ADR</h2>
         <p class="price">R$24,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/38a1c3bcee3542af9335c047fd8602aa">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/38a1c3bcee3542af9335c047fd8602aa" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="HS-Peito.PNG" alt="HS Peito">
         <span class="tag">Free Fire</span>
+        <img src="HS-Peito.PNG" alt="HS Peito">
         <h2>HS Peito - iOS</h2>
         <p class="price">R$29,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/e696c853118c4623a8bfe711d062b8c2">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/e696c853118c4623a8bfe711d062b8c2" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="HS-Peito-ADR.png" alt="HS Peito">
         <span class="tag">Free Fire</span>
+        <img src="HS-Peito-ADR.png" alt="HS Peito">
         <h2>HS Peito - ADR</h2>
         <p class="price">R$24,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/00e21aef7374474da81b2a2c66506f6e">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/00e21aef7374474da81b2a2c66506f6e" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="HS-Cabeça.png" alt="HS Cabeça">
         <span class="tag">Free Fire</span>
+        <img src="HS-Cabeça.png" alt="HS Cabeça">
         <h2>HS Cabeça - iOS</h2>
         <p class="price">R$29,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/ff5ea7a41f10407fb258e8ef0fee15c0">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/ff5ea7a41f10407fb258e8ef0fee15c0" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="HS-Cabeça-ADR.jpg" alt="HS Cabeça">
         <span class="tag">Free Fire</span>
+        <img src="HS-Cabeça-ADR.jpg" alt="HS Cabeça">
         <h2>HS Cabeça - ADR</h2>
         <p class="price">R$24,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/10226de55fea4cfe8e34a56c7685c810">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/10226de55fea4cfe8e34a56c7685c810" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="CLT.jpg" alt="Painel CLT">
         <span class="tag">Free Fire</span>
+        <img src="CLT.jpg" alt="Painel CLT">
         <h2>Painel CLT - iOS</h2>
         <p class="price">R$34,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/b53c8035363c46e6a16015c5285d8e30">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/b53c8035363c46e6a16015c5285d8e30" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="CLT.jpg" alt="Painel CLT">
         <span class="tag">Free Fire</span>
+        <img src="CLT.jpg" alt="Painel CLT">
         <h2>Painel CLT - ADR</h2>
         <p class="price">R$29,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/b680e803b78f409aaf26cb30a50a82ef">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/b680e803b78f409aaf26cb30a50a82ef" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="Scooby-Doo.jpg" alt="Painel Scooby-Doo">
         <span class="tag">Free Fire</span>
+        <img src="Scooby-Doo.jpg" alt="Painel Scooby-Doo">
         <h2>Painel Scooby-Doo - ADR</h2>
         <p class="price">R$29,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/3ad35391be574a5cbf153f7595407362">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/3ad35391be574a5cbf153f7595407362" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="Scooby-Doo.jpg" alt="Painel Scooby-Doo">
         <span class="tag">Free Fire</span>
+        <img src="Scooby-Doo.jpg" alt="Painel Scooby-Doo">
         <h2>Painel Scooby-Doo - iOS</h2>
         <p class="price">R$34,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/acff6226b7754833bb24e741068f76d9">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/acff6226b7754833bb24e741068f76d9" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="Stealth.png" alt="Stealth">
         <span class="tag">SA-MP</span>
+        <img src="Stealth.png" alt="Stealth">
         <h2>Stealth - PC</h2>
         <p class="price">R$9,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/f3fe887585354bfa8765d029b4e122c8">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/f3fe887585354bfa8765d029b4e122c8" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="UltraFuck.jpg" alt="UltraFuck">
         <span class="tag">SA-MP</span>
+        <img src="UltraFuck.jpg" alt="UltraFuck">
         <h2>UltraFuck - PC</h2>
         <p class="price">Grátis</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://www.mediafire.com/file/daflq8a0tnovwxq/%2Altr%2AF%2Ack_2.36.luac/file">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://www.mediafire.com/file/daflq8a0tnovwxq/%2Altr%2AF%2Ack_2.36.luac/file" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="JordanX.png" alt="Painel JordanX">
         <span class="tag">Free Fire</span>
+        <img src="JordanX.png" alt="Painel JordanX">
         <h2>Painel JordanX - iOS</h2>
-        <p class="price">R$29.99</p>
+        <p class="price">R$29,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/9b2f6ef659d84e24bf26ce571a568103">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/9b2f6ef659d84e24bf26ce571a568103" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
+        <span class="tag">Free Fire</span>
         <img src="JordanX.png" alt="Painel JordanX">
-        <span class="tag">Free Fire</span>
         <h2>Painel JordanX - ADR</h2>
-        <p class="price">R$19.99</p>
+        <p class="price">R$19,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/fc28cf94d3754aa8999af749f73a32f7">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/fc28cf94d3754aa8999af749f73a32f7" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="SadX.png" alt="Painel SadX">
         <span class="tag">Free Fire</span>
+        <img src="SadX.png" alt="Painel SadX">
         <h2>Painel SadX - iOS</h2>
-        <p class="price">R$29.99</p>
+        <p class="price">R$29,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/bceb136678044c3cba186532f16b3a46">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/bceb136678044c3cba186532f16b3a46" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
+        <span class="tag">Free Fire</span>
         <img src="SadX.png" alt="Painel SadX">
-        <span class="tag">Free Fire</span>
         <h2>Painel SadX - ADR</h2>
-        <p class="price">R$19.99</p>
+        <p class="price">R$19,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/3019093f19e34a64ac679e772bc6957d">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/3019093f19e34a64ac679e772bc6957d" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="UrielXiter.png" alt="Uriel Xiter">
         <span class="tag">Free Fire</span>
+        <img src="UrielXiter.png" alt="Uriel Xiter">
         <h2>Uriel Xiter - ADR</h2>
-        <p class="price">R$39.99</p>
+        <p class="price">R$39,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/bc9639ec36db4cc1a666032aa38ace34">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/bc9639ec36db4cc1a666032aa38ace34" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="UrielXiter.png" alt="Uriel Xiter">
         <span class="tag">Free Fire</span>
+        <img src="UrielXiter.png" alt="Uriel Xiter">
         <h2>Uriel Xiter - iOS</h2>
-        <p class="price">R$44.99</p>
+        <p class="price">R$44,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/d9e7788d2ed045f38a6b9b288c64e08d">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://pay.risepay.com.br/Pay/d9e7788d2ed045f38a6b9b288c64e08d" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="Scarllet-Menu.jpg" alt="Scarllet Menu">
         <span class="tag">SA-MP</span>
+        <img src="Scarllet-Menu-Android.jpg" alt="Scarllet Menu">
         <h2>Scarllet Menu - ADR</h2>
         <p class="price">Grátis</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://www.mediafire.com/file/x1f60zyao1ezt7j/scarlletproject.lua/file">
-        <button class="btn-neon">Adquirir</button>
-        </a>
+        <a href="https://www.mediafire.com/file/x1f60zyao1ezt7j/scarlletproject.lua/file" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="Scarllet-Menu.jpg" alt="Scarllet Menu">
         <span class="tag">SA-MP</span>
+        <img src="Scarllet-Menu.jpg" alt="Scarllet Menu">
         <h2>Scarllet Menu - PC</h2>
-        <p class="price">R$14.99</p>
+        <p class="price">R$14,99</p>
         <p class="stock">99+ em estoque</p>
-        <a href="https://pay.risepay.com.br/Pay/a213dd490ccf41969b90dd106a6e71c9">
-        <button class="btn-neon">Adquirir</button>
-      </a>
+        <a href="https://pay.risepay.com.br/Pay/a213dd490ccf41969b90dd106a6e71c9" class="neon-btn">Adquirir</a>
       </div>
 
       <div class="product-card">
-        <img src="Scarllet-Menu.jpg" alt="Scarllet Menu">
         <span class="tag">SA-MP</span>
+        <img src="Scarllet-Menu.jpg" alt="Scarllet Menu">
         <h2>Scarllet Menu - PC</h2>
         <p class="price">Grátis</p>
         <p class="stock">99+ em estoque</p>
         <p class="stock">Versão Grátis</p>
-        <a href="https://www.mediafire.com/file/arwwg5thaein7rg/Scarllet_Menu_PC.lua/file">
-        <button class="btn-neon">Adquirir</button>
-      </a>
+        <a href="https://www.mediafire.com/file/arwwg5thaein7rg/Scarllet_Menu_PC.lua/file" class="neon-btn">Adquirir</a>
       </div>
     </div>
   </main>
 
+  <div class="popup" id="popup">
+    <h2 id="popup-title"></h2>
+    <p id="popup-description"></p>
+    <button class="neon-btn" onclick="closePopup()">Fechar</button>
+  </div>
+
+  <audio id="click-sound" src="Bloop.mp3" preload="auto"></audio>
+
   <script>
-    const searchInput = document.getElementById('searchInput');
-    const productCards = document.querySelectorAll('.product-card');
+    document.addEventListener("DOMContentLoaded", () => {
+      // Snowflake Effect
+      const createSnowflake = () => {
+        const snowflake = document.createElement("div");
+        snowflake.classList.add("snowflake");
+        snowflake.style.left = Math.random() * 100 + "vw";
+        snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+        snowflake.style.opacity = Math.random();
+        document.body.appendChild(snowflake);
+        setTimeout(() => snowflake.remove(), 5000);
+      };
+      setInterval(createSnowflake, 150);
 
-    searchInput.addEventListener('input', () => {
-      const searchTerm = searchInput.value.toLowerCase();
+      // Smooth Scroll
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
 
-      productCards.forEach(card => {
-        const title = card.querySelector('h2').textContent.toLowerCase();
-        const tag = card.querySelector('.tag').textContent.toLowerCase();
+      // Search Functionality
+      const searchInput = document.getElementById('searchInput');
+      const productCards = document.querySelectorAll('.product-card');
 
-        if (title.includes(searchTerm) || tag.includes(searchTerm)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
+      searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        productCards.forEach(card => {
+          const title = card.querySelector('h2').textContent.toLowerCase();
+          const tag = card.querySelector('.tag').textContent.toLowerCase();
+          card.style.display = (title.includes(searchTerm) || tag.includes(searchTerm)) ? 'block' : 'none';
+        });
+      });
+
+      // Click Sound
+      const clickSound = document.getElementById('click-sound');
+      document.addEventListener('click', () => {
+        if (clickSound) {
+          const clone = clickSound.cloneNode();
+          clone.play();
         }
       });
     });
+
+    // Popup Functions
+    function showPopup(title, description) {
+      document.getElementById('popup-title').textContent = title;
+      document.getElementById('popup-description').textContent = description;
+      document.getElementById('popup').style.display = 'block';
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
   </script>
-
-<audio id="click-sound" src="Bloop.mp3" preload="auto"></audio>
-
-<script>
-  const clickSound = document.getElementById('click-sound');
-
-  document.addEventListener('click', () => {
-    if (clickSound) {
-      // Clona o áudio pra evitar bugs se clicar rápido várias vezes
-      const clone = clickSound.cloneNode();
-      clone.play();
-    }
-  });
-</script>
-
-<script>
-  function copyMessage() {
-    const text = "Mensagem personalizada copiada com sucesso!";
-    navigator.clipboard.writeText(text).then(() => {
-      alert("Mensagem copiada!");
-    });
-  }
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const createSnowflake = () => {
-      const snowflake = document.createElement("div");
-      snowflake.classList.add("snowflake");
-      snowflake.style.left = Math.random() * 100 + "vw";
-      snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
-      snowflake.style.opacity = Math.random();
-      document.body.appendChild(snowflake);
-
-      setTimeout(() => {
-        snowflake.remove();
-      }, 5000);
-    };
-
-    setInterval(createSnowflake, 150);
-  });
-</script>
-
-<style>
-  .snowflake {
-    position: fixed;
-    top: 0;
-    width: 10px;
-    height: 10px;
-    background: #a855f7;
-    box-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7;
-    border-radius: 50%;
-    animation: fall linear infinite;
-    z-index: 9999;
-  }
-
-  @keyframes fall {
-    to {
-      transform: translateY(100vh);
-    }
-  }
-</style>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'936ebff8fb52451b',t:'MTc0NTc2MTQxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
