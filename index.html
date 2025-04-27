@@ -4,186 +4,123 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>0xDead Market</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
-      color: #fff;
+      background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
+      color: #e0e0e0;
       overflow-x: hidden;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 100px;
-      padding: 2rem;
-      background: rgba(10, 10, 10, 0.8);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 20px rgba(168, 85, 247, 10);
       position: relative;
+      min-height: 100vh;
     }
-    .logo {
-      font-size: 2rem;
-      color: #a855f7;
-      text-shadow: 0 0 10px #a855f7;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 30px; /* Sobe/Desce */
-}
-    nav a {
-      margin: 0 1rem;
-      color: #fff;
-      text-decoration: none;
-      position: relative;
-    }
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
+
+    /* Glitch Background Effect */
+    .glitch-bg {
+      position: fixed;
+      top: 0;
       left: 0;
-      background: #a855f7;
-      transition: 0.3s ease;
-    }
-      nav a:hover::after {
       width: 100%;
-    }
-    .hero {
-    position: relative;
-    padding: 2.5rem;
-    margin: 2rem auto;
-    max-width: 900px;
-    border: 2px solid #a855f7;
-    box-shadow: 0 0 15px #a855f7, 
-                inset 0 0 15px #a855f7;
-    border-radius: 10px;
-    background: rgba(10, 10, 10, 0.6);
-    text-align: center; /* Centraliza todo o conteúdo */
-  }
-
-  .hero-content {
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza horizontalmente */
-  }
-
-  .hero h1 {
-    max-width: 80%; /* Controla largura do título */
-  }
-
-  .hero p {
-    max-width: 700px; /* Largura ideal para leitura */
-    margin-left: auto;
-    margin-right: auto;
-  }
-    .neon-btn {
-      margin-top: 2rem;
-      padding: 1rem 2rem;
-      font-size: 1rem;
-      background: transparent;
-      border: 2px solid #a855f7;
-      border-radius: 50px;
-      color: #fff;
-      cursor: pointer;
-      box-shadow: 0 0 10px #a855f7, inset 0 0 10px #a855f7;
-      transition: 0.3s;
-    }
-    .neon-btn:hover {
-      background: #a855f7;
-      box-shadow: 0 0 20px #a855f7, inset 0 0 20px #a855f7;
-    }
-    .glass-section {
-      margin-top: 5rem;
-      padding: 3rem;
-      background: rgba(255, 255, 255, 0);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
-      max-width: 90vw;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-    .glass-section h2 {
-      font-size: 2rem;
-      color: #a855f7;
-    }
-
-    .floating-ui {
-      position: absolute;
-      top: 125px;
-      left: 65px;
-      transform: translateX(-50%);
-      background: rgba(70, 0, 110, 0.325);
-      padding: 1rem;
-      border-radius: 15px;
-      box-shadow: 0 0 15px #a855f7;
-      backdrop-filter: blur(10px);
-      animation: floaty 4s ease-in-out infinite;
-      z-index: 9999;
-      text-align: center;
-      font-size: 1rem;
-    }
-
-    /* Estilos para os cards */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin-top: 60px;
-      padding: 0 40px;
-      align-items: stretch;
-    }
-    
-    .product-card {
-      background: rgba(168, 85, 247, 0.05);
-      padding: 20px;
-      border-radius: 20px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(168, 85, 247, 0.4);
-      display: flex;
-      flex-direction: column;
       height: 100%;
-      justify-content: space-between;
+      background: url('https://wallpapers.com/images/hd/purple-space-background-5145-x-2226-oe1kqq43c0yoj2xr.jpg') repeat;
+      opacity: 0.1;
+      z-index: -1;
+      animation: glitch 5s infinite;
     }
-    
-    .product-card:hover {
-      transform: translateY(-5px);
+
+    @keyframes glitch {
+      0%, 100% { transform: translate(0, 0); opacity: 0.1; }
+      50% { transform: translate(2px, -2px); opacity: 0.15; }
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: rgba(10, 10, 20, 0.9);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.7);
+      z-index: 1000;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.5), transparent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 2s infinite;
       box-shadow: 0 0 20px rgba(168, 85, 247, 0.8);
     }
-    
-    .product-card img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 12px;
-    }
-    
-    .product-card h3 {
-      margin: 10px 0 4px;
-      font-size: 18px;
-      color: #fff;
-    }
-    
-    .stock {
-      font-size: 14px;
-      color: #aaa;
+
+    .logo-circle img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: drop-shadow(0 0 10px #a855f7);
     }
 
-    /* Redes sociais */
+    .logo-text {
+      font-size: 2rem;
+      color: #a855f7;
+      text-shadow: 0 0 15px #a855f7;
+      animation: flicker 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Floating UI */
+    .floating-ui {
+      position: fixed;
+      top: 150px;
+      left: 20px;
+      background: rgba(20, 20, 40, 0.8);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #a855f7;
+      backdrop-filter: blur(10px);
+      animation: floaty 3s ease-in-out infinite;
+      z-index: 999;
+      text-align: center;
+    }
+
+    .floating-ui p {
+      font-size: 1rem;
+      color: #a855f7;
+      margin-bottom: 1rem;
+    }
+
     .social-buttons {
       display: flex;
-      gap: 15px;
+      gap: 1rem;
       justify-content: center;
     }
 
@@ -191,185 +128,270 @@
       background: none;
       border: none;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s;
     }
 
     .social-buttons button:hover {
-      transform: scale(1.1);
+      transform: scale(1.2);
     }
 
     .social-buttons img {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
+      filter: drop-shadow(0 0 5px #a855f7);
     }
 
-    /* Logo na posição certa */
-    .logo-circle {
-      position: absolute;
-      top: 10px;
-      left: 20px;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      overflow: hidden;
-      background: rgba(163, 66, 255, 0.2);
-      box-shadow: 0 0 20px rgba(163, 66, 255, 0.6);
-      backdrop-filter: blur(5px);
-    }
-    
-    .circle-effect {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      animation: pulseRotate 4s linear infinite;
-      filter: drop-shadow(0 0 10px #a855f7);
-      opacity: 1.0;
-    }
-    
-    .logo-img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      object-fit: cover;
-      position: relative;
-      z-index: 2;
-      transition: all 0.3s ease;
-      border: 2px solid rgba(168, 85, 247, 0.3);
-    }
-    
-    .logo-circle:hover .logo-img {
-      transform: scale(1.05);
-      border-color: rgba(168, 85, 247, 0.6);
-    }
-    
-    .logo-circle::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(168,85,247,0.4) 0%, rgba(168,85,247,0) 70%);
-      border-radius: 50%;
-      z-index: 1;
-      animation: pulseGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes pulseRotate {
-      0% { transform: rotate(0deg) scale(1); opacity: 0.9; }
-      50% { transform: rotate(180deg) scale(1.05); opacity: 0.7; }
-      100% { transform: rotate(360deg) scale(1); opacity: 0.9; }
-    }
-    
-    @keyframes pulseGlow {
-      0%, 100% { transform: scale(1); opacity: 0.7; }
-      50% { transform: scale(1.1); opacity: 0.4; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
     @keyframes floaty {
-      0% { transform: translateY(0) translateX(-50%); }
-      50% { transform: translateY(-10px) translateX(-50%); }
-      100% { transform: translateY(0) translateX(-50%); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
     }
 
-      /* Site mobile */
-  @media (max-width: 768px) {
-    header {
-      height: auto;
-      padding: 1rem;
-      flex-direction: column;
-    }
-    
-    .logo {
-      position: static;
-      transform: none;
-      margin: 10px 0;
-      font-size: 1.5rem;
-    }
-    
-    .logo-circle {
-      position: static;
-      margin: 0 auto;
-      width: 60px;
-      height: 60px;
-    }
-    
-    nav {
-      margin-top: 15px;
-    }
-    
+    /* Hero Section */
     .hero {
-      padding: 1.5rem;
-      margin: 1rem;
-      max-width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(circle at center, rgba(168, 85, 247, 0.2), transparent);
+      position: relative;
+      overflow: hidden;
     }
-    
+
     .hero h1 {
-      font-size: 2rem;
-      max-width: 100%;
+      font-size: 4rem;
+      color: #fff;
+      text-shadow: 0 0 20px #a855f7, 0 0 40px #ff00ff;
+      animation: neon-pulse 2s infinite;
     }
-    
+
     .hero p {
-      max-width: 100%;
-      font-size: 1rem;
-    }
-    
-    .floating-ui {
-      position: static;
-      transform: none;
-      margin: 20px auto;
-      width: 90%;
-      animation: none;
-    }
-    
-    .products-grid {
-      grid-template-columns: 1fr;
-      padding: 0 15px;
-      gap: 20px;
-    }
-    
-    .glass-section {
-    position: relative;
-    padding: 2.5rem;
-    margin: 2rem 20px; /* margem nas laterais (20px de cada lado) */
-    max-width: 900px;
-    border: 2px solid #a855f7;
-    box-shadow: 0 0 15px #a855f7, 
-    inset 0 0 15px #a855f7;
-    border-radius: 10px;
-    background: rgba(10, 10, 10, 0.6);
-    text-align: center; /* Centraliza todo o conteúdo */
+      font-size: 1.5rem;
+      max-width: 700px;
+      margin: 1rem 0;
+      color: #ccc;
+      text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
     }
 
     .neon-btn {
-      padding: 0.8rem 1.5rem;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background: transparent;
+      border: 3px solid #a855f7;
+      border-radius: 50px;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 15px #a855f7, inset 0 0 15px #a855f7;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
-  }
 
-  /* Melhorias para tablets */
-  @media (min-width: 769px) and (max-width: 1024px) {
+    .neon-btn:hover {
+      background: #a855f7;
+      box-shadow: 0 0 30px #a855f7, inset 0 0 30px #a855f7;
+      transform: scale(1.05);
+    }
+
+    @keyframes neon-pulse {
+      0%, 100% { text-shadow: 0 0 20px #a855f7, 0 0 40px #ff00ff; }
+      50% { text-shadow: 0 0 30px #a855f7, 0 0 60px #ff00ff; }
+    }
+
+    /* Products Section */
+    .products-section {
+      padding: 5rem 2rem;
+      background: rgba(10, 10, 20, 0.5);
+      backdrop-filter: blur(10px);
+      margin: 2rem 0;
+    }
+
+    .products-section h2 {
+      font-size: 2.5rem;
+      color: #a855f7;
+      text-align: center;
+      margin-bottom: 3rem;
+      text-shadow: 0 0 15px #a855f7;
+    }
+
     .products-grid {
-      grid-template-columns: repeat(2, 1fr);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 0 2rem;
     }
-  }
 
+    .product-card {
+      background: rgba(20, 20, 40, 0.8);
+      border: 2px solid #a855f7;
+      border-radius: 15px;
+      padding: 1.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: card-appear 0.5s ease-out;
+      text-align: center;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px #a855f7;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      filter: brightness(0.9);
+      transition: filter 0.3s;
+    }
+
+    .product-card:hover img {
+      filter: brightness(1.1);
+    }
+
+    .product-card h3 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card .stock {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 1rem;
+    }
+
+    .product-card .btn-neon {
+      align-self: center;
+      margin-top: auto;
+    }
+
+    @keyframes card-appear {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Pop-up */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(20, 20, 40, 0.95);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 40px #a855f7;
+      z-index: 10000;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      animation: popup-appear 0.3s ease-out;
+    }
+
+    .popup h2 {
+      font-size: 2rem;
+      color: #a855f7;
+      margin-bottom: 1rem;
+    }
+
+    .popup p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+    }
+
+    .popup .neon-btn {
+      background: #a855f7;
+    }
+
+    .popup .neon-btn:hover {
+      background: #ff00ff;
+    }
+
+    @keyframes popup-appear {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    /* Snowflake Effect */
+    .snowflake {
+      position: fixed;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      background: #a855f7;
+      box-shadow: 0 0 15px #a855f7;
+      border-radius: 50%;
+      animation: fall linear infinite;
+      z-index: 999;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(100vh); }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .floating-ui {
+        display: none;
+      }
+
+      header {
+        padding: 1rem;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+      }
+
+      .logo-circle {
+        width: 50px;
+        height: 50px;
+      }
+
+      .logo-circle img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="glitch-bg"></div>
+
   <header>
-    <div class="logo-circle">
-      <img src="Circulo-Relampago-Roxo2.png" class="circle-effect" alt="Efeito" />
-      <img src="0xDead-Market.jpg" class="logo-img" alt="Logo 0xDead Market">
+    <div class="logo-container">
+      <div class="logo-circle">
+        <img src="0xDead-Market.jpg" alt="Logo 0xDead Market">
+      </div>
+      <div class="logo-text">0xDead Market</div>
     </div>
-    <div class="logo">0xDead Market</div>
   </header>
 
   <div class="floating-ui">
@@ -382,174 +404,173 @@
         <img src="Instagram.png" alt="Instagram" />
       </button>
     </div>
-  </div> 
+  </div>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Bem-Vindo ao <span style="color: #a855f7; text-shadow: 0 0 8px #a855f7;">0xDead Market</h1>
-      <p>0xDead Market nasceu com o propósito de oferecer os melhores cheats para sua experiência em jogos. Trabalhamos com segurança, rapidez e qualidade.</p>
-      <p>Nosso foco é criar uma plataforma confiável, leal, com uma interface moderna e simples de usar.</p>
-      <p>Fique à vontade para navegar pela loja, conhecer os produtos e fazer parte dessa comunidade!</p>
-      <p>Esse é o <span style="color: #a855f7; text-shadow: 0 0 8px #a855f7;">0xDead Market</span>. Bem-Vindo(a) e boa compra!</p>
-    </div>
-    <div class="hero-btn-container">
-      <button class="neon-btn" style="color: #a855f7; font-weight: bold; text-shadow: 0 0 10px #a855f7;" onclick="window.location.href='products.html';">Ver Produtos</button>
-    </div>
+  <section class="hero" id="home">
+    <h1>Bem-Vindo ao <span style="color: #a855f7;">0xDead Market</span></h1>
+    <p>0xDead Market nasceu com o propósito de oferecer os melhores cheats para sua experiência em jogos. Trabalhamos com segurança, rapidez e qualidade.</p>
+    <p>Nosso foco é criar uma plataforma confiável, leal, com uma interface moderna e simples de usar.</p>
+    <p>Fique à vontade para navegar pela loja, conhecer os produtos e fazer parte dessa comunidade!</p>
+    <p>Esse é o <span style="color: #a855f7; text-shadow: 0 0 8px #a855f7;">0xDead Market</span>. Bem-Vindo(a) e boa compra!</p>
+    <button class="neon-btn" onclick="window.location.href='products.html'">Ver Produtos</button>
   </section>
-  
-  <div class="glass-section" id="features">
+
+  <section class="products-section" id="updates">
     <h2>🆕 Atualizações</h2>
     <div class="products-grid">
-
       <div class="product-card">
-        <img src="FFH4X.jpg" alt="Painel CLT">
+        <img src="FFH4X.jpg" alt="Mod Menu FFH4X">
         <h3>Mod Menu FFH4X</h3>
         <p class="stock">Adicionado em 20/04/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Mod Menu FFH4X', 'Novo cheat para Free Fire com recursos avançados.')">Detalhes</button>
       </div>
-      
       <div class="product-card">
-        <img src="Scooby-Doo.jpg" alt="Painel CLT">
+        <img src="Scooby-Doo.jpg" alt="Painel Scooby-Doo">
         <h3>Painel Scooby-Doo - ADR</h3>
         <p class="stock">Adicionado em 16/04/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Painel Scooby-Doo - ADR', 'Jogabilidade aprimorada para Android.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="CLT.jpg" alt="Painel CLT">
         <h3>Painel CLT - ADR</h3>
         <p class="stock">Adicionado em 09/04/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Painel CLT - ADR', 'Otimizado para dispositivos Android.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="CLT.jpg" alt="Painel CLT">
         <h3>Painel CLT - iOS</h3>
         <p class="stock">Adicionado em 01/04/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Painel CLT - iOS', 'Otimizado para dispositivos iOS.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="Scooby-Doo.jpg" alt="Painel Scooby Doo">
         <h3>Painel Scooby Doo - iOS</h3>
         <p class="stock">Adicionado em 31/03/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Painel Scooby Doo - iOS', 'Jogabilidade aprimorada para iOS.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="XIT-DNS.jpeg" alt="XIT DNS">
         <h3>XIT DNS - iOS</h3>
         <p class="stock">Adicionado em 30/03/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('XIT DNS - iOS', 'Cheat otimizado para Free Fire em iOS.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="HS-Cabeça-ADR.jpg" alt="HS Cabeça">
         <h3>HS Cabeça - ADR</h3>
         <p class="stock">Adicionado em 29/03/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('HS Cabeça - ADR', 'Aprimoramento de precisão para Android.')">Detalhes</button>
       </div>
-
       <div class="product-card">
-        <img src="HS-Pescoço-ADR.jpg" alt="HS Pescoço">
+        <img src="HS-Pescoço - ADR.jpg" alt="HS Pescoço">
         <h3>HS Pescoço - ADR</h3>
         <p class="stock">Adicionado em 28/03/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('HS Pescoço - ADR', 'Aprimoramento de precisão para Android.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="HS-Pescoço.png" alt="HS Pescoço">
         <h3>HS Pescoço - iOS</h3>
         <p class="stock">Adicionado em 27/03/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('HS Pescoço - iOS', 'Aprimoramento de precisão para iOS.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="HS-Cabeça.png" alt="HS Cabeça">
         <h3>HS Cabeça - iOS</h3>
         <p class="stock">Adicionado em 26/03/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('HS Cabeça - iOS', 'Aprimoramento de precisão para iOS.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="HS-Peito-ADR.png" alt="HS Peito">
         <h3>HS Peito - ADR</h3>
         <p class="stock">Adicionado em 25/03/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('HS Peito - ADR', 'Aprimoramento de precisão para Android.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="HS-Peito.PNG" alt="HS Peito">
         <h3>HS Peito - iOS</h3>
         <p class="stock">Adicionado em 19/03/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('HS Peito - iOS', 'Aprimoramento de precisão para iOS.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="JordanX.png" alt="Painel JordanX">
         <h3>Painel JordanX - iOS</h3>
         <p class="stock">Adicionado em 27/02/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Painel JordanX - iOS', 'Painel avançado para Free Fire em iOS.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="JordanX.png" alt="Painel JordanX">
         <h3>Painel JordanX - ADR</h3>
         <p class="stock">Adicionado em 21/02/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Painel JordanX - ADR', 'Painel avançado para Free Fire em Android.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="SadX.png" alt="Painel SadX">
         <h3>Painel SadX - iOS</h3>
         <p class="stock">Adicionado em 11/02/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Painel SadX - iOS', 'Painel otimizado para Free Fire em iOS.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="SadX.png" alt="Painel SadX">
         <h3>Painel SadX - ADR</h3>
         <p class="stock">Adicionado em 05/02/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Painel SadX - ADR', 'Painel otimizado para Free Fire em Android.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="Scarllet-Menu-Android.jpg" alt="Scarllet Menu">
         <h3>Scarllet Menu - ADR</h3>
         <p class="stock">VERSÃO GRÁTIS</p>
         <p class="stock">Adicionado em 01/01/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Scarllet Menu - ADR', 'Menu gratuito para SA-MP em Android.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="Scarllet-Menu.jpg" alt="Scarllet Menu">
         <h3>Scarllet Menu - PC</h3>
         <p class="stock">VERSÃO PAGA</p>
         <p class="stock">Adicionado em 01/01/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Scarllet Menu - PC', 'Menu premium para SA-MP em PC.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="Scarllet-Menu.jpg" alt="Scarllet Menu">
         <h3>Scarllet Menu - PC</h3>
         <p class="stock">VERSÃO GRÁTIS</p>
         <p class="stock">Adicionado em 01/01/2025</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Scarllet Menu - PC', 'Menu gratuito para SA-MP em PC.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="UrielXiter.png" alt="Uriel Xiter">
         <h3>Uriel Xiter - ADR</h3>
         <p class="stock">Adicionado em 29/12/2024</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Uriel Xiter - ADR', 'Cheat avançado para Free Fire em Android.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="UrielXiter.png" alt="Uriel Xiter">
         <h3>Uriel Xiter - iOS</h3>
         <p class="stock">Adicionado em 27/12/2024</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Uriel Xiter - iOS', 'Cheat avançado para Free Fire em iOS.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="UltraFuck.jpg" alt="UltraFuck">
         <h3>UltraFuck - PC</h3>
         <p class="stock">Adicionado em 10/10/2024</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('UltraFuck - PC', 'Cheat para SA-MP em PC.')">Detalhes</button>
       </div>
-
       <div class="product-card">
         <img src="Stealth.png" alt="Stealth">
         <h3>Stealth - PC</h3>
         <p class="stock">Adicionado em 06/09/2024</p>
+        <button class="neon-btn btn-neon" onclick="showPopup('Stealth - PC', 'Cheat furtivo para SA-MP em PC.')">Detalhes</button>
       </div>
     </div>
+  </section>
 
-  <div class="glass-section">
-    <h2>Direitos</h2>
-    <p>&copy; 2024 0xDead Market. Todos os direitos reservados.</p>
+  <div class="popup" id="popup">
+    <h2 id="popup-title"></h2>
+    <p id="popup-description"></p>
+    <button class="neon-btn" onclick="closePopup()">Fechar</button>
   </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // Snowflake Effect
       const createSnowflake = () => {
         const snowflake = document.createElement("div");
         snowflake.classList.add("snowflake");
@@ -557,34 +578,22 @@
         snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
         snowflake.style.opacity = Math.random();
         document.body.appendChild(snowflake);
-  
-        setTimeout(() => {
-          snowflake.remove();
-        }, 5000);
+        setTimeout(() => snowflake.remove(), 5000);
       };
-  
       setInterval(createSnowflake, 150);
     });
-  </script>
 
-  <style>
-    .snowflake {
-      position: fixed;
-      top: 0;
-      width: 10px;
-      height: 10px;
-      background: #a855f7;
-      box-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7;
-      border-radius: 50%;
-      animation: fall linear infinite;
-      z-index: 9999;
+    // Popup Functions
+    function showPopup(title, description) {
+      document.getElementById('popup-title').textContent = title;
+      document.getElementById('popup-description').textContent = description;
+      document.getElementById('popup').style.display = 'block';
     }
-  
-    @keyframes fall {
-      to {
-        transform: translateY(100vh);
-      }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
     }
-  </style>
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'936eb07efdf64515',t:'MTc0NTc2MDc4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
